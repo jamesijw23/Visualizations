@@ -1,0 +1,20 @@
+library(ggplot2)
+
+df = iris 
+x_var = "Sepal.Length"
+y_var = "Sepal.Width"
+z_var =  "Species" 
+col = "red"
+size_point = 2
+##-----------------------------------
+## Scatter Plot (2 Quant. Vars)
+## Input: df, x_var (independent var.), y_var (dependent var.), color
+## Output: Scatter Plot
+##-----------------------------------
+ggplot(df,aes_string(x = x_var, y = y_var))  +
+  geom_point(colour = col, size = size_point) +
+  ggtitle(paste0(y_var," vs. ",x_var, sep=""))+
+  xlab(x_var) +
+  ylab(y_var) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
