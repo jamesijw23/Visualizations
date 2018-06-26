@@ -4,7 +4,7 @@ library(dplyr)
 df = iris 
 
 
-plot_function_v1 = function(df,x_var,y_var,z_var,bin = 20,
+plot_function_v1 = function(df,x_var,y_var,z_var,bin_size = 20,
                             col = "red", size_point = 2,
                             type){
   cat(type)
@@ -61,7 +61,7 @@ plot_function_v1 = function(df,x_var,y_var,z_var,bin = 20,
     
     
     
-  }else if(type =="Hisogram"){
+  }else if(type =="Histogram"){
     ##-----------------------------------
     ## Histogram (1 Qual Var.)
     ## Input: df, x_var (Quant. var.), color, bin size
@@ -116,3 +116,11 @@ plot_function_v1(df,
                  col = "black",
                  size_point = 3,
                  type="Scatter_F")
+
+
+## Histogram Works
+plot_function_v1(df,
+                 x_var = "Sepal.Length",
+                 col = "blue",
+                 size_point = 3,
+                 type="Histogram")
