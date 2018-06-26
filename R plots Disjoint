@@ -26,7 +26,7 @@ ggplot(df,aes_string(x = x_var, y = y_var))  +
 ##-----------------------------------
 ## Bar Plot (1 Quant. Var. & 1 Qual. Var.)
 ## Input: df, x_var1 (independent var.), y_var1 (dependent var.), color
-## Output: Scatter Plot
+## Output: Bar Plot
 ##-----------------------------------
 ## Modifications
 sum_sep_l = df %>% 
@@ -52,8 +52,8 @@ bin_size = 20
 
 ##-----------------------------------
 ## Histogram (1 Qual Var.)
-## Input: df, x_var (independent var.), color, bin size
-## Output: Scatter Plot
+## Input: df, x_var (Quant. var.), color, bin size
+## Output: Plain Histogram
 ##-----------------------------------
 ggplot(df,aes_string(x = x_var)) + 
   geom_histogram(fill=col,bins = bin_size) +
@@ -64,6 +64,12 @@ ggplot(df,aes_string(x = x_var)) +
   theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
         axis.title.y = element_text(size = rel(1.5), angle = 90),
         axis.title.x = element_text(size = rel(1.5), angle = 00))
+
+
+
+
+
+
 
 
 
@@ -86,3 +92,19 @@ ggplot(df,aes_string(x = x_var)) +
 
 
 
+##-----------------------------------
+## Faceted Scatter Plot (2 Quant. Vars; 1 Qual Var. 3 levels )
+## Input: df, x_var (independent var.), 
+##        y_var (dependent var.), color, size_point
+## Output: Scatter Plot
+##-----------------------------------
+ggplot(df,aes_string(x = x_var, y = y_var))  +
+  geom_point(colour = col, size = size_point) +
+  facet_wrap(z_var) +
+  ggtitle(paste0("Scatter Plot of ", y_var," vs. ",x_var, sep=""))+
+  xlab(x_var) +
+  ylab(y_var) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
+        axis.title.y = element_text(size = rel(1.5), angle = 90),
+        axis.title.x = element_text(size = rel(1.5), angle = 00))
