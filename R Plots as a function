@@ -124,3 +124,29 @@ plot_function_v1(df,
                  col = "blue",
                  size_point = 3,
                  type="Histogram")
+
+## Histogram Faceted Works
+plot_function_v1(df,
+                 x_var = "Sepal.Length",
+                 col = "red",
+                 z_var = "Species",
+                 size_point = 3,
+                 type="Histogram_F")
+
+
+
+
+## Barplot Works
+## Modifications
+mean_sep_l = df %>% 
+  group_by(Species) %>%
+  summarise(mean_sep_l = mean(Sepal.Length))
+df1 = mean_sep_l
+x_var1 = "Species"
+y_var1 = "mean_sep_l"
+plot_function_v1(df1,
+                 x_var = x_var1,
+                 y_var = y_var1,
+                 type="Barplot",
+                 size_point = 5,
+                 col = "blue")
