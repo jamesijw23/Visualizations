@@ -65,3 +65,24 @@ ggplot(df,aes_string(x = x_var)) +
         axis.title.y = element_text(size = rel(1.5), angle = 90),
         axis.title.x = element_text(size = rel(1.5), angle = 00))
 
+
+
+
+##-----------------------------------
+## Faceted Histogram (1 Qual Vars., 1 Qual with 3 levels)
+## Input: df, x_var (Quant. var.), z_var (Qual. var), color, bin size
+## Output: Faceted Histogram
+##-----------------------------------
+ggplot(df,aes_string(x = x_var)) + 
+  geom_histogram(fill=col,bins = bin_size) +
+  facet_wrap(z_var) +
+  ggtitle(paste0("Histogram of ",x_var, " Faceted",sep=""))+
+  xlab(x_var) +
+  ylab("Frequency") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
+        axis.title.y = element_text(size = rel(1.5), angle = 90),
+        axis.title.x = element_text(size = rel(1.5), angle = 00))
+
+
+
