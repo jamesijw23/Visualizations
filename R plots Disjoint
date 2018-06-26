@@ -46,3 +46,22 @@ ggplot(df1,aes_string(x = x_var1, y = y_var1)) +
   theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
         axis.title.y = element_text(size = rel(1.5), angle = 90),
         axis.title.x = element_text(size = rel(1.5), angle = 00))
+
+
+bin_size = 20
+
+##-----------------------------------
+## Histogram (1 Qual Var.)
+## Input: df, x_var (independent var.), color, bin size
+## Output: Scatter Plot
+##-----------------------------------
+ggplot(df,aes_string(x = x_var)) + 
+  geom_histogram(fill=col,bins = bin_size) +
+  ggtitle(paste0("Histogram of ",x_var, sep=""))+
+  xlab(x_var) +
+  ylab("Frequency") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
+        axis.title.y = element_text(size = rel(1.5), angle = 90),
+        axis.title.x = element_text(size = rel(1.5), angle = 00))
+
