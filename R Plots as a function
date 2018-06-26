@@ -1,0 +1,118 @@
+library(ggplot2)
+library(dplyr)
+
+df = iris 
+
+
+plot_function_v1 = function(df,x_var,y_var,z_var,bin = 20,
+                            col = "red", size_point = 2,
+                            type){
+  cat(type)
+  
+  if(type == "Scatter"){
+    ##-----------------------------------
+    ## Scatter Plot (2 Quant. Vars)
+    ## Input: df, x_var (independent var.), 
+    ##        y_var (dependent var.), color, size_point
+    ## Output: Scatter Plot
+    ##-----------------------------------
+    ggplot(df,aes_string(x = x_var, y = y_var))  +
+      geom_point(colour = col, size = size_point) +
+      ggtitle(paste0("Scatter Plot of ", y_var," vs. ",x_var, sep=""))+
+      xlab(x_var) +
+      ylab(y_var) +
+      theme_minimal() +
+      theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
+            axis.title.y = element_text(size = rel(1.5), angle = 90),
+            axis.title.x = element_text(size = rel(1.5), angle = 00))
+  }else if(type == "Scatter_F"){
+    ##-----------------------------------
+    ## Faceted Scatter Plot (2 Quant. Vars; 1 Qual Var. 3 levels )
+    ## Input: df, x_var (independent var.), 
+    ##        y_var (dependent var.), color, size_point
+    ## Output: Scatter Plot
+    ##-----------------------------------
+    ggplot(df,aes_string(x = x_var, y = y_var))  +
+      geom_point(colour = col, size = size_point) +
+      facet_wrap(z_var) +
+      ggtitle(paste0("Scatter Plot of ", y_var," vs. ",x_var, sep=""))+
+      xlab(x_var) +
+      ylab(y_var) +
+      theme_minimal() +
+      theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
+            axis.title.y = element_text(size = rel(1.5), angle = 90),
+            axis.title.x = element_text(size = rel(1.5), angle = 00))
+    
+  } else if(type =="Barplot"){
+    ##-----------------------------------
+    ## Bar Plot (1 Quant. Var. & 1 Qual. Var.)
+    ## Input: df, x_var1 (independent var.), y_var1 (dependent var.), color
+    ## Output: Bar Plot
+    ##-----------------------------------
+    ggplot(df,aes_string(x = x_var, y = y_var)) + 
+      geom_bar(stat = "identity",fill = col) +
+      ggtitle(paste0("Barplot of ",y_var," vs. ",x_var, sep=""))+
+      xlab(x_var) +
+      ylab(y_var) +
+      theme_minimal() +
+      theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
+            axis.title.y = element_text(size = rel(1.5), angle = 90),
+            axis.title.x = element_text(size = rel(1.5), angle = 00))
+    
+    
+    
+  }else if(type =="Hisogram"){
+    ##-----------------------------------
+    ## Histogram (1 Qual Var.)
+    ## Input: df, x_var (Quant. var.), color, bin size
+    ## Output: Plain Histogram
+    ##-----------------------------------
+    ggplot(df,aes_string(x = x_var)) + 
+      geom_histogram(fill=col,bins = bin_size) +
+      ggtitle(paste0("Histogram of ",x_var, sep=""))+
+      xlab(x_var) +
+      ylab("Frequency") +
+      theme_minimal() +
+      theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
+            axis.title.y = element_text(size = rel(1.5), angle = 90),
+            axis.title.x = element_text(size = rel(1.5), angle = 00))
+    
+  } else if(type =="Histogram_F"){
+    ##-----------------------------------
+    ## Faceted Histogram (1 Qual Vars., 1 Qual with 3 levels)
+    ## Input: df, x_var (Quant. var.), z_var (Qual. var), color, bin size
+    ## Output: Faceted Histogram
+    ##-----------------------------------
+    ggplot(df,aes_string(x = x_var)) + 
+      geom_histogram(fill=col,bins = bin_size) +
+      facet_wrap(z_var) +
+      ggtitle(paste0("Histogram of ",x_var, " Faceted",sep=""))+
+      xlab(x_var) +
+      ylab("Frequency") +
+      theme_minimal() +
+      theme(plot.title = element_text(hjust = 0.5,size = 20, face = "bold"),
+            axis.title.y = element_text(size = rel(1.5), angle = 90),
+            axis.title.x = element_text(size = rel(1.5), angle = 00))
+    
+  }
+  
+  
+}
+
+
+## Scatterplot Works
+plot_function_v1(df,
+                 x_var = "Sepal.Length",
+                 y_var = "Petal.Width",
+                 type="Scatter",
+                 size_point = 5,
+                 col = "blue")
+
+## Scatterplot Facted Works
+plot_function_v1(df,
+                 x_var = "Sepal.Length",
+                 y_var = "Sepal.Width",
+                 z_var = "Species",
+                 col = "black",
+                 size_point = 3,
+                 type="Scatter_F")
