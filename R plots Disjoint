@@ -18,3 +18,25 @@ ggplot(df,aes_string(x = x_var, y = y_var))  +
   ylab(y_var) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
+  
+##-----------------------------------
+## Bar Plot (1 Quant. Var. & 1 Qual. Var.)
+## Input: df, x_var1 (independent var.), y_var1 (dependent var.), color
+## Output: Scatter Plot
+##-----------------------------------
+## Modifications
+sum_sep_l = df %>% 
+  group_by(Species) %>%
+  summarise(sum_sep_l = sum(Sepal.Length))
+df1 = sum_sep_l
+x_var1 = "Species"
+y_var1 = "sum_sep_l"
+
+
+ggplot(df1,aes_string(x = x_var1, y = y_var1)) + 
+  geom_bar(stat = "identity",fill = col) +
+  ggtitle(paste0(y_var1," vs. ",x_var1, sep=""))+
+  xlab(x_var1) +
+  ylab(y_var1) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
